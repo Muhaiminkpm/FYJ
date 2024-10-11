@@ -1,0 +1,28 @@
+name: even_managment
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1  
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+   - asstes\Screenshot_2024-10-08_011447-removebg-preview.png
+   - asstes\Screenshot_2024-10-08_192811-removebg-preview.png
+   - asstes\Screenshot_2024-10-08_193219-removebg-preview.png
+   - asstes\Screenshot_2024-10-08_194043-removebg-preview.png
+
+
+
