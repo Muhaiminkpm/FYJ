@@ -144,10 +144,14 @@ class _AddRequestState extends State<AddRequest> {
               },
             ),
             SizedBox(
-              height: 20,
+              height: 30,
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  fixedSize: Size(350, 30),
+                  backgroundColor: Colors.blue),
               onPressed: () {},
               child: Text(
                 'Add',
