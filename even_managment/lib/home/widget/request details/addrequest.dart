@@ -10,14 +10,153 @@ class AddRequest extends StatefulWidget {
 }
 
 class _AddRequestState extends State<AddRequest> {
+  List<num> selectNum =
+      List.generate(20, (int index) => index + 1); // For experience years
+  num? Valuenum; // For experience start
+
+  List<String> selectCource = [
+    'Net Developer',
+    'Accountant',
+    'Entrepreneur',
+    'Civil Engineer'
+  ]; // For job selection
+
+  String? Valuechoose; // For job dropdown
+  num? startExperience; // For experience start dropdown
+  num? endExperience; // For experience end dropdown
+
+  String description = ''; // To hold the description input
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-      title: Text(
-        'Add  Request',
-        style: GoogleFonts.ubuntu(),
+      appBar: AppBar(
+        title: Text(
+          'Add Request',
+          style: GoogleFonts.ubuntu(),
+        ),
       ),
-    ));
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Technology',
+              style: GoogleFonts.openSans(),
+            ),
+            SizedBox(height: 10),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              items: selectCource.map((String valueitem) {
+                return DropdownMenuItem<String>(
+                  value: valueitem,
+                  child: Text(valueitem),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  Valuechoose = value;
+                });
+              },
+              value: Valuechoose,
+              hint: Text('Select Job'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Experience',
+              style: GoogleFonts.openSans(),
+            ),
+            SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: DropdownButtonFormField<num>(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    items: selectNum.map((num value) {
+                      return DropdownMenuItem<num>(
+                        value: value,
+                        child: Text(value.toString()),
+                      );
+                    }).toList(),
+                    onChanged: (num? value) {
+                      setState(() {
+                        startExperience = value;
+                      });
+                    },
+                    value: startExperience,
+                    hint: Text('Start'),
+                  ),
+                ),
+                SizedBox(width: 10), // Add spacing between fields
+                Expanded(
+                  child: DropdownButtonFormField<num>(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                    items: selectNum.map((num value) {
+                      return DropdownMenuItem<num>(
+                        value: value,
+                        child: Text(value.toString()),
+                      );
+                    }).toList(),
+                    onChanged: (num? value) {
+                      setState(() {
+                        endExperience = value;
+                      });
+                    },
+                    value: endExperience,
+                    hint: Text('End'),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Description',
+              style: GoogleFonts.openSans(),
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                hintText: 'Enter details here...',
+              ),
+              maxLines: 4, // Allow multiline input
+              onChanged: (value) {
+                setState(() {
+                  description = value;
+                });
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              onPressed: () {},
+              child: Text(
+                'Add',
+                style: GoogleFonts.openSans(color: Colors.white),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

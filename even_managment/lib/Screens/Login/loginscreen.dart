@@ -33,7 +33,7 @@ class _LogScreenState extends State<LogScreen> {
                   decoration: const InputDecoration(
                       filled: true,
                       border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
+                        borderSide: BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
                       hintText: 'eg:mail@gmail.com',
