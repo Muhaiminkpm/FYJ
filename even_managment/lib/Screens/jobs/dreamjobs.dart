@@ -18,8 +18,8 @@ class _DreamJobState extends State<DreamJob> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              'asstes/Screenshot_2024-10-08_011447-removebg-preview.png',
-              color: const Color.fromARGB(211, 244, 241, 241),
+              'asstes/dreem_job.png',
+              color: Color.fromARGB(162, 244, 241, 241),
               width: 400,
               fit: BoxFit.fitWidth,
             ),
@@ -78,9 +78,9 @@ and typesetting industry'''),
                                 MaterialPageRoute(
                                     builder: (context) => const SuccesPage()));
                           },
-                          child: const Icon(
-                            Icons.arrow_right_alt,
-                            color: Colors.black,
+                          child: Text(
+                            'Next',
+                            style: TextStyle(color: Colors.white),
                           ),
                         )
                       ],

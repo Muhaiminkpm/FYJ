@@ -1,4 +1,5 @@
 import 'package:even_managment/home/widget/request%20details/addrequest.dart';
+import 'package:even_managment/home/widget/request%20details/details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -160,6 +161,10 @@ class _RequestScreenState extends State<RequestScreen> {
               //   },
               //   child: const Text('Resume'),
               // ),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DetailEmploye()));
+              },
             ),
           );
         },

@@ -19,10 +19,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - asstes\Screenshot_2024-10-08_011447-removebg-preview.png
-   - asstes\Screenshot_2024-10-08_192811-removebg-preview.png
+   - asstes\dreem_job.png 
+   - asstes\success_man.png
    - asstes\Screenshot_2024-10-08_193219-removebg-preview.png
    - asstes\Screenshot_2024-10-08_194043-removebg-preview.png
-
+   - asstes\job icon.png
 
 

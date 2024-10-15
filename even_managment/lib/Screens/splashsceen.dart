@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     fontSize: 20,
                     fontWeight: FontWeight.normal),
               ),
-          Image.asset('asstes/Screenshot_2024-10-08_194043-removebg-preview.png')
+              Image.asset('asstes/job icon.png')
             ],
           ),
         ),

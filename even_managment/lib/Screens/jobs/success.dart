@@ -18,8 +18,7 @@ class _SuccesPageState extends State<SuccesPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Image.asset(
-              'asstes/Screenshot_2024-10-08_192811-removebg-preview.png',
-              color: const Color.fromARGB(211, 244, 241, 241),
+              'asstes/success_man.png',
               width: 400,
               fit: BoxFit.fitWidth,
             ),
@@ -68,21 +67,21 @@ and typesetting industry'''),
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: BeveledRectangleBorder(
-                                  borderRadius: BorderRadius.circular(3)),
-                              backgroundColor: Colors.blue),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const FuturePage()));
-                          },
-                          child: const Icon(
-                            Icons.arrow_right_alt,
-                            color: Colors.black,
-                          ),
-                        )
+                            style: ElevatedButton.styleFrom(
+                                shape: BeveledRectangleBorder(
+                                    borderRadius: BorderRadius.circular(3)),
+                                backgroundColor: Colors.blue),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const FuturePage()));
+                            },
+                            child: Text(
+                              'Next',
+                              style: TextStyle(color: Colors.white),
+                            ))
                       ],
                     )
                   ],

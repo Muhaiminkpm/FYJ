@@ -33,6 +33,37 @@ class _AddRequestState extends State<AddRequest> {
 
   String description = ''; // To hold the description input
 
+  // Validation method
+  bool validateForm() {
+    if (Valuechoose == null) {
+      showErrorMessage('Please select a job.');
+      return false;
+    }
+    if (startExperience == null || endExperience == null) {
+      showErrorMessage('Please select experience range.');
+      return false;
+    }
+    if (startExperience != null &&
+        endExperience != null &&
+        startExperience! >= endExperience!) {
+      showErrorMessage(
+          'End experience should be greater than start experience.');
+      return false;
+    }
+    if (description.isEmpty) {
+      showErrorMessage('Please enter a description.');
+      return false;
+    }
+    return true;
+  }
+
+  // Method to display error message
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,129 +73,138 @@ class _AddRequestState extends State<AddRequest> {
           style: GoogleFonts.ubuntu(),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Technology',
-              style: GoogleFonts.openSans(),
-            ),
-            SizedBox(height: 10),
-            DropdownButtonFormField<String>(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Technology',
+                style: GoogleFonts.openSans(),
               ),
-              items: selectCource.map((String valueitem) {
-                return DropdownMenuItem<String>(
-                  value: valueitem,
-                  child: Text(valueitem),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  Valuechoose = value;
-                });
-              },
-              value: Valuechoose,
-              hint: Text('Select Job'),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Experience',
-              style: GoogleFonts.openSans(),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<num>(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    items: selectNum.map((num value) {
-                      return DropdownMenuItem<num>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
-                    onChanged: (num? value) {
-                      setState(() {
-                        startExperience = value;
-                      });
-                    },
-                    value: startExperience,
-                    hint: Text('Start'),
+              SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
-                SizedBox(width: 10), // Add spacing between fields
-                Expanded(
-                  child: DropdownButtonFormField<num>(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
+                items: selectCource.map((String valueitem) {
+                  return DropdownMenuItem<String>(
+                    value: valueitem,
+                    child: Text(valueitem),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    Valuechoose = value;
+                  });
+                },
+                value: Valuechoose,
+                hint: Text('Select Job'),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Experience',
+                style: GoogleFonts.openSans(),
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: DropdownButtonFormField<num>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
+                      items: selectNum.map((num value) {
+                        return DropdownMenuItem<num>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                      onChanged: (num? value) {
+                        setState(() {
+                          startExperience = value;
+                        });
+                      },
+                      value: startExperience,
+                      hint: Text('Start'),
                     ),
-                    items: selectNum.map((num value) {
-                      return DropdownMenuItem<num>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
-                    onChanged: (num? value) {
-                      setState(() {
-                        endExperience = value;
-                      });
-                    },
-                    value: endExperience,
-                    hint: Text('End'),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Description',
-              style: GoogleFonts.openSans(),
-            ),
-            SizedBox(height: 10),
-            TextFormField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                hintText: 'Enter details here...',
+                  SizedBox(width: 10), // Add spacing between fields
+                  Expanded(
+                    child: DropdownButtonFormField<num>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      items: selectNum.map((num value) {
+                        return DropdownMenuItem<num>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                      onChanged: (num? value) {
+                        setState(() {
+                          endExperience = value;
+                        });
+                      },
+                      value: endExperience,
+                      hint: Text('End'),
+                    ),
+                  ),
+                ],
               ),
-              maxLines: 4, // Allow multiline input
-              onChanged: (value) {
-                setState(() {
-                  description = value;
-                });
-              },
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  fixedSize: Size(350, 30),
-                  backgroundColor: Colors.blue),
-              onPressed: () {},
-              child: Text(
-                'Add',
-                style: GoogleFonts.openSans(color: Colors.white),
+              SizedBox(
+                height: 20,
               ),
-            )
-          ],
+              Text(
+                'Description',
+                style: GoogleFonts.openSans(),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  hintText: 'Enter details here...',
+                ),
+                maxLines: 4, // Allow multiline input
+                onChanged: (value) {
+                  setState(() {
+                    description = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    fixedSize: Size(350, 30),
+                    backgroundColor: Colors.blue),
+                onPressed: () {
+                  if (validateForm()) {
+                    // Proceed to submit form if validation passes
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Request successfully added!')),
+                    );
+                  }
+                },
+                child: Text(
+                  'Add',
+                  style: GoogleFonts.openSans(color: Colors.white),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
