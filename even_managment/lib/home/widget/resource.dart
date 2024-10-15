@@ -1,4 +1,5 @@
 import 'package:even_managment/home/widget/resource%20details/addresource.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -121,7 +122,11 @@ class _ResourceScreenState extends State<ResourceScreen> {
         itemBuilder: (context, index) {
           final resource =
               showMyResources ? myResources[index] : allResources[index];
-          return Card(
+          return Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Color.fromARGB(242, 108, 104, 106)),
+                borderRadius: BorderRadius.circular(5),
+                color: Color.fromARGB(255, 225, 238, 244)),
             margin: const EdgeInsets.all(10),
             child: ListTile(
               title: Text(resource['name']!),
@@ -136,10 +141,19 @@ class _ResourceScreenState extends State<ResourceScreen> {
                 ],
               ),
               trailing: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () {
                   // Resume action
                 },
-                child: const Text('Resume'),
+                child: const Text(
+                  'Resume',
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
             ),
           );

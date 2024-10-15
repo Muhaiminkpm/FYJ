@@ -122,7 +122,11 @@ class _RequestScreenState extends State<RequestScreen> {
         itemBuilder: (context, index) {
           final resource =
               showMyResources ? myResources[index] : allResources[index];
-          return Card(
+          return Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Color.fromARGB(242, 108, 104, 106)),
+                borderRadius: BorderRadius.circular(5),
+                color: Color.fromARGB(255, 225, 238, 244)),
             margin: const EdgeInsets.all(10),
             child: ListTile(
               title: Text(resource['name']!),
@@ -131,9 +135,23 @@ class _RequestScreenState extends State<RequestScreen> {
                 children: [
                   Text(resource['experience']!),
                   const SizedBox(height: 4),
-                  Text(resource['role']!),
-                  const SizedBox(height: 4),
-                  Text(resource['contact']!),
+                  Container(
+                    height: 1, // Height of the line
+                    color: Colors.grey, // Color of the line
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(Icons.tv),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text(resource['role']!),
+                      const SizedBox(width: 20),
+                      Icon(Icons.stay_current_portrait_rounded),
+                      Text(resource['contact']!),
+                    ],
+                  ),
                 ],
               ),
               // trailing: ElevatedButton(

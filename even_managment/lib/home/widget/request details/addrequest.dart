@@ -17,8 +17,14 @@ class _AddRequestState extends State<AddRequest> {
   List<String> selectCource = [
     'Net Developer',
     'Accountant',
-    'Entrepreneur',
-    'Civil Engineer'
+    'Graphic Designer ',
+    'Teacher',
+    'Logistics',
+    'Digital Marketer',
+    'Civil Engineer',
+    'Electrician',
+    'Sales Executive ',
+    'Hotel Manager'
   ]; // For job selection
 
   String? Valuechoose; // For job dropdown
