@@ -13,7 +13,10 @@ class _DetailEmployeState extends State<DetailEmploye> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details'),
+        title:Row(
+          
+
+        ),
       ),
     );
   }

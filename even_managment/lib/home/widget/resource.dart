@@ -1,6 +1,9 @@
 import 'package:even_managment/home/widget/resource%20details/addresource.dart';
+import 'package:even_managment/home/widget/resource%20details/resource.dart';
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+
 
 class ResourceScreen extends StatefulWidget {
   const ResourceScreen({super.key});
@@ -11,42 +14,8 @@ class ResourceScreen extends StatefulWidget {
 
 class _ResourceScreenState extends State<ResourceScreen> {
   bool showMyResources = false;
-
-  final List<Map<String, String>> allResources = [
-    {
-      "name": "John Deo",
-      "experience": "5+ Years of Exp.",
-      "role": "Graphic Designer",
-      "contact": "+91 88665 88665"
-    },
-    {
-      "name": "Mark Johnson",
-      "experience": "7+ Years of Exp.",
-      "role": "Graphic Designer",
-      "contact": "+91 88665 88665"
-    },
-    {
-      "name": "Devid Anderson",
-      "experience": "7+ Years of Exp.",
-      "role": "Graphic Designer",
-      "contact": "+91 88665 88665"
-    },
-  ];
-
-  final List<Map<String, String>> myResources = [
-    {
-      "name": "Mark Johnson",
-      "experience": "7+ Years of Exp.",
-      "role": "Graphic Designer",
-      "contact": "+91 88665 88665"
-    },
-    {
-      "name": "Devid Anderson",
-      "experience": "7+ Years of Exp.",
-      "role": "Graphic Designer",
-      "contact": "+91 88665 88665"
-    },
-  ];
+  List<Resource> allResources = [];
+  List<Resource> myResources = [];
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +34,24 @@ class _ResourceScreenState extends State<ResourceScreen> {
       body: ListView.builder(
         itemCount: showMyResources ? myResources.length : allResources.length,
         itemBuilder: (context, index) {
-          final resource =
-              showMyResources ? myResources[index] : allResources[index];
+          final resource = showMyResources
+              ? myResources[index]
+              : allResources[index];
           return buildResourceTile(resource);
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddResource()));
+        onPressed: () async {
+          final newResource = await Navigator.push<Resource>(
+            context,
+            MaterialPageRoute(builder: (context) => const AddResource()),
+          );
+
+          if (newResource != null) {
+            setState(() {
+              allResources.add(newResource);
+            });
+          }
         },
         child: const Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.blue,
@@ -112,7 +90,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
   }
 
   // Helper widget to build resource tile
-  Widget buildResourceTile(Map<String, String> resource) {
+  Widget buildResourceTile(Resource resource) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: const Color.fromARGB(242, 108, 104, 106)),
@@ -127,7 +105,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
             Row(
               children: [
                 Expanded(
-                  child: Text(resource['name'] ?? 'Unknown',
+                  child: Text(resource.name,
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
@@ -139,23 +117,27 @@ class _ResourceScreenState extends State<ResourceScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Resume action
+                    // Logic for viewing/downloading the resume
+                    if (resource.resumePath != null) {
+                      // Implement resume viewing logic, e.g., open file or show it
+                      print('Resume path: ${resource.resumePath}');
+                    }
                   },
                   child: const Text('Resume',
                       style: TextStyle(color: Colors.blue)),
                 ),
               ],
             ),
-            Text(resource['experience'] ?? 'N/A'),
+            Text('Experience: ${resource.experience}'),
             const Divider(thickness: 1),
             Row(
               children: [
-                const Icon(Icons.tv),
+                const Icon(Icons.computer),
                 const SizedBox(width: 4),
-                Text(resource['role'] ?? 'N/A'),
+                Text(resource.technology),
                 const SizedBox(width: 20),
-                const Icon(Icons.stay_current_portrait_rounded),
-                Text(resource['contact'] ?? 'N/A'),
+                const Icon(Icons.phone),
+                Text(resource.phone),
               ],
             ),
           ],

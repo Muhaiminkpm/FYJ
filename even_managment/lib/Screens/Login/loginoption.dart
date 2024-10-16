@@ -25,12 +25,14 @@ class _LoginOptionState extends State<LoginOption> {
               style: TextStyle(color: Colors.white),
             ),
             Image.asset(
-                'asstes/Screenshot_2024-10-08_194043-removebg-preview.png'),
+              'asstes/job icon.png',
+              height: 100,
+            ),
             const SizedBox(
               height: 200,
             ),
             Container(
-              height: 414,
+              height: 440,
               width: 500,
               decoration: const BoxDecoration(
                 color: Colors.white,
