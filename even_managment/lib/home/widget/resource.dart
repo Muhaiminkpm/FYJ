@@ -1,9 +1,11 @@
-import 'package:even_managment/home/widget/resource%20details/addresource.dart';
-import 'package:even_managment/home/widget/resource%20details/resource.dart';
+// file: resource_screen.dart
+
+import 'package:even_managment/home/widget/resource%20details/fechresource.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:even_managment/home/widget/resource%20details/addresource.dart';
+import 'package:even_managment/Screens/PDF/pdfscreen.dart'; // Ensure the path is correct
+import 'resource.dart';
 
 class ResourceScreen extends StatefulWidget {
   const ResourceScreen({super.key});
@@ -13,9 +15,32 @@ class ResourceScreen extends StatefulWidget {
 }
 
 class _ResourceScreenState extends State<ResourceScreen> {
-  bool showMyResources = false;
-  List<Resource> allResources = [];
-  List<Resource> myResources = [];
+  // List of resources to display
+  List<Resource> resources = [
+    Resource(
+      name: 'John Deo',
+      experience: '5+ Years of Exp.',
+      technology: 'Graphic Designer',
+      phone: '+91 88665 88665',
+      resumePath:
+          'path/to/resume.pdf', // Update this with a real path if needed
+    ),
+    Resource(
+      name: 'Mark Johnson',
+      experience: '7+ Years of Exp.',
+      technology: 'React Developer',
+      phone: '+91 99887 99887',
+      resumePath:
+          'path/to/resume.jpg', // Update this with a real path if needed
+    ),
+  ];
+
+  // Callback function to add a new resource
+  void _addResource(Resource newResource) {
+    setState(() {
+      resources.add(newResource); // Add new resource to the list
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,32 +51,27 @@ class _ResourceScreenState extends State<ResourceScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            buildTab('All Resources', !showMyResources),
-            buildTab('My Resources', showMyResources),
+            Text('All Resources', style: GoogleFonts.ubuntu(fontSize: 18)),
           ],
         ),
       ),
       body: ListView.builder(
-        itemCount: showMyResources ? myResources.length : allResources.length,
+        itemCount: resources.length, // Number of resources to display
         itemBuilder: (context, index) {
-          final resource = showMyResources
-              ? myResources[index]
-              : allResources[index];
+          final resource = resources[index];
           return buildResourceTile(resource);
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final newResource = await Navigator.push<Resource>(
+        onPressed: () {
+          Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddResource()),
+            MaterialPageRoute(
+              builder: (context) => AddResource(
+                  onAddResource:
+                      _addResource), // Passing callback to AddResource screen
+            ),
           );
-
-          if (newResource != null) {
-            setState(() {
-              allResources.add(newResource);
-            });
-          }
         },
         child: const Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.blue,
@@ -59,89 +79,79 @@ class _ResourceScreenState extends State<ResourceScreen> {
     );
   }
 
-  // Helper widget to build each tab
-  Widget buildTab(String title, bool isActive) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          showMyResources = title == 'My Resources';
-        });
-      },
-      child: Column(
-        children: [
-          const SizedBox(height: 22),
-          Text(
-            title,
-            style: GoogleFonts.ubuntu(
-              color: isActive ? Colors.blue : Colors.black,
-              fontSize: 18,
-            ),
-          ),
-          if (isActive)
-            Container(
-              margin: const EdgeInsets.only(top: 2),
-              height: 2,
-              width: 150,
-              color: Colors.blue,
-            ),
-        ],
-      ),
-    );
-  }
-
-  // Helper widget to build resource tile
+  // Helper function to build the resource tile UI
   Widget buildResourceTile(Resource resource) {
     return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromARGB(242, 108, 104, 106)),
-        borderRadius: BorderRadius.circular(5),
-        color: const Color.fromARGB(255, 225, 238, 244),
-      ),
       margin: const EdgeInsets.all(10),
-      child: ListTile(
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(resource.name,
-                      style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold)),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black26),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Name and Resume button row
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  resource.name,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () {
-                    // Logic for viewing/downloading the resume
-                    if (resource.resumePath != null) {
-                      // Implement resume viewing logic, e.g., open file or show it
-                      print('Resume path: ${resource.resumePath}');
-                    }
-                  },
-                  child: const Text('Resume',
-                      style: TextStyle(color: Colors.blue)),
                 ),
-              ],
-            ),
-            Text('Experience: ${resource.experience}'),
-            const Divider(thickness: 1),
-            Row(
-              children: [
-                const Icon(Icons.computer),
-                const SizedBox(width: 4),
-                Text(resource.technology),
-                const SizedBox(width: 20),
-                const Icon(Icons.phone),
-                Text(resource.phone),
-              ],
-            ),
-          ],
-        ),
+                onPressed: () {
+                  // Only open the viewer if resumePath is not empty
+                  if (resource.resumePath != null &&
+                      resource.resumePath!.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FileViewerScreen(
+                          filePath: resource.resumePath!,
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Display a message if no resume is available
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('No resume available')),
+                    );
+                  }
+                },
+                child:
+                    const Text('Resume', style: TextStyle(color: Colors.blue)),
+              ),
+            ],
+          ),
+          // Experience text
+          Text(
+            resource.experience,
+            style: const TextStyle(fontSize: 16),
+          ),
+          const Divider(thickness: 1),
+
+          // Role and Phone number row
+          Row(
+            children: [
+              const Icon(Icons.computer, size: 18),
+              const SizedBox(width: 5),
+              Text(resource.technology),
+              const SizedBox(width: 20),
+              const Icon(Icons.phone, size: 18),
+              const SizedBox(width: 5),
+              Text(resource.phone),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -1,52 +1,44 @@
+// file: add_resource.dart
+
 import 'dart:io';
-import 'package:even_managment/home/widget/resource%20details/resource.dart';
+import 'package:even_managment/home/widget/resource%20details/fechresource.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
-
 
 class AddResource extends StatefulWidget {
-  const AddResource({super.key});
+  final Function(Resource) onAddResource; // Callback to pass data
+
+  const AddResource({super.key, required this.onAddResource});
 
   @override
   State<AddResource> createState() => _AddResourceState();
 }
 
 class _AddResourceState extends State<AddResource> {
-  XFile? _pickedImage;
-
+  String? _pickedFilePath;
   final _formKey = GlobalKey<FormState>();
-
-  // Form fields controllers
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _experienceController = TextEditingController();
+  String? selectedTechnology;
   final TextEditingController _phoneController = TextEditingController();
 
   // List of technologies for dropdown
   List<String> technologies = ['Flutter', 'React', '.NET', 'Node.js', 'Python'];
-  String? selectedTechnology;
 
-  Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'], // Restrict to these formats
+    );
+
+    if (result != null) {
       setState(() {
-        _pickedImage = image;
+        _pickedFilePath = result.files.single.path; // Get the full file path
       });
-    }
-  }
-
-  void _submitResource() {
-    if (_formKey.currentState!.validate()) {
-      Resource newResource = Resource(
-        name: _nameController.text,
-        experience: _experienceController.text,
-        technology: selectedTechnology!,
-        phone: _phoneController.text,
-        resumePath: _pickedImage?.path,
-      );
-
-      Navigator.pop(context, newResource);  // Pass the data back to the previous screen
+      print('File picked: $_pickedFilePath');
+    } else {
+      print('No file selected');
     }
   }
 
@@ -54,10 +46,7 @@ class _AddResourceState extends State<AddResource> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Add Resource',
-          style: GoogleFonts.ubuntu(),
-        ),
+        title: Text('Add Resource', style: GoogleFonts.ubuntu()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -67,7 +56,7 @@ class _AddResourceState extends State<AddResource> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Name Field
+                // Name input field
                 Text('Name', style: GoogleFonts.openSans()),
                 TextFormField(
                   controller: _nameController,
@@ -86,7 +75,7 @@ class _AddResourceState extends State<AddResource> {
                 ),
                 const SizedBox(height: 20),
 
-                // Experience Field
+                // Experience input field
                 Text('Experience', style: GoogleFonts.openSans()),
                 TextFormField(
                   controller: _experienceController,
@@ -95,7 +84,7 @@ class _AddResourceState extends State<AddResource> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintText: 'Enter experience',
+                    hintText: 'Enter experience in years',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -106,7 +95,7 @@ class _AddResourceState extends State<AddResource> {
                 ),
                 const SizedBox(height: 20),
 
-                // Technology Dropdown
+                // Technology dropdown
                 Text('Technology', style: GoogleFonts.openSans()),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
@@ -136,7 +125,7 @@ class _AddResourceState extends State<AddResource> {
                 ),
                 const SizedBox(height: 20),
 
-                // Phone Field
+                // Phone input field
                 Text('Phone', style: GoogleFonts.openSans()),
                 TextFormField(
                   controller: _phoneController,
@@ -145,7 +134,7 @@ class _AddResourceState extends State<AddResource> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    hintText: 'Enter number',
+                    hintText: 'Enter phone number',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -159,42 +148,42 @@ class _AddResourceState extends State<AddResource> {
                 ),
                 const SizedBox(height: 20),
 
-                // Resume (Image) Picker
+                // Resume file picker
                 Text('Resume', style: GoogleFonts.openSans()),
                 const SizedBox(height: 10),
-                Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: _pickedImage == null
-                      ? IconButton(
-                          onPressed: _pickImage,
-                          icon: const Icon(Icons.add),
-                        )
-                      : Image.file(
-                          File(_pickedImage!.path),
-                          fit: BoxFit.cover,
-                        ),
+                Row(
+                  children: [
+                    _pickedFilePath == null
+                        ? IconButton(
+                            onPressed: _pickFile,
+                            icon: const Icon(Icons.attach_file),
+                          )
+                        : Text('Selected file: ${_pickedFilePath!.split('/').last}'),
+                  ],
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
 
-                // Submit Button
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    fixedSize: const Size(350, 30),
-                    backgroundColor: Colors.blue,
+                // Submit button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        final newResource = Resource(
+                          name: _nameController.text,
+                          experience: _experienceController.text,
+                          technology: selectedTechnology!,
+                          phone: _phoneController.text,
+                          resumePath: _pickedFilePath ?? '',
+                        );
+
+                        // Use the callback to pass the new resource to the parent screen
+                        widget.onAddResource(newResource);
+                        Navigator.pop(context); // Close the form
+                      }
+                    },
+                    child: const Text('Add Resource'),
                   ),
-                  onPressed: _submitResource,
-                  child: Text(
-                    'Submit',
-                    style: GoogleFonts.openSans(color: Colors.white),
-                  ),
-                )
+                ),
               ],
             ),
           ),

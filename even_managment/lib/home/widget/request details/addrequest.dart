@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:even_managment/home/widget/request%20details/fechrequest.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+ // Import the ResourceData file
 
 class AddRequest extends StatefulWidget {
   const AddRequest({super.key});
@@ -10,11 +11,10 @@ class AddRequest extends StatefulWidget {
 }
 
 class _AddRequestState extends State<AddRequest> {
-  List<num> selectNum =
-      List.generate(20, (int index) => index + 1); // For experience years
-  num? Valuenum; // For experience start
-
-  List<String> selectCource = [
+  List<num> selectNum = List.generate(20, (int index) => index + 1); // Experience years
+  num? startExperience;
+  num? endExperience;
+  List<String> selectJob = [
     'Net Developer',
     'Accountant',
     'Graphic Designer ',
@@ -25,13 +25,9 @@ class _AddRequestState extends State<AddRequest> {
     'Electrician',
     'Sales Executive ',
     'Hotel Manager'
-  ]; // For job selection
-
-  String? Valuechoose; // For job dropdown
-  num? startExperience; // For experience start dropdown
-  num? endExperience; // For experience end dropdown
-
-  String description = ''; // To hold the description input
+  ]; // Job selection
+  String? Valuechoose;
+  String description = '';
 
   // Validation method
   bool validateForm() {
@@ -43,11 +39,8 @@ class _AddRequestState extends State<AddRequest> {
       showErrorMessage('Please select experience range.');
       return false;
     }
-    if (startExperience != null &&
-        endExperience != null &&
-        startExperience! >= endExperience!) {
-      showErrorMessage(
-          'End experience should be greater than start experience.');
+    if (startExperience != null && endExperience != null && startExperience! >= endExperience!) {
+      showErrorMessage('End experience should be greater than start experience.');
       return false;
     }
     if (description.isEmpty) {
@@ -79,18 +72,14 @@ class _AddRequestState extends State<AddRequest> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Technology',
-                style: GoogleFonts.openSans(),
-              ),
-              SizedBox(height: 10),
+              // Dropdown for job selection
+              Text('Technology', style: GoogleFonts.openSans()),
+              const SizedBox(height: 10),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
                 ),
-                items: selectCource.map((String valueitem) {
+                items: selectJob.map((String valueitem) {
                   return DropdownMenuItem<String>(
                     value: valueitem,
                     child: Text(valueitem),
@@ -102,22 +91,19 @@ class _AddRequestState extends State<AddRequest> {
                   });
                 },
                 value: Valuechoose,
-                hint: Text('Select Job'),
+                hint: const Text('Select Job'),
               ),
-              SizedBox(height: 20),
-              Text(
-                'Experience',
-                style: GoogleFonts.openSans(),
-              ),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
+
+              // Experience dropdowns
+              Text('Experience', style: GoogleFonts.openSans()),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<num>(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
                       ),
                       items: selectNum.map((num value) {
                         return DropdownMenuItem<num>(
@@ -131,16 +117,14 @@ class _AddRequestState extends State<AddRequest> {
                         });
                       },
                       value: startExperience,
-                      hint: Text('Start'),
+                      hint: const Text('Start'),
                     ),
                   ),
-                  SizedBox(width: 10), // Add spacing between fields
+                  const SizedBox(width: 10),
                   Expanded(
                     child: DropdownButtonFormField<num>(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
                       ),
                       items: selectNum.map((num value) {
                         return DropdownMenuItem<num>(
@@ -154,48 +138,49 @@ class _AddRequestState extends State<AddRequest> {
                         });
                       },
                       value: endExperience,
-                      hint: Text('End'),
+                      hint: const Text('End'),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Description',
-                style: GoogleFonts.openSans(),
-              ),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
+
+              // Description field
+              Text('Description', style: GoogleFonts.openSans()),
+              const SizedBox(height: 10),
               TextFormField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
                   hintText: 'Enter details here...',
                 ),
-                maxLines: 4, // Allow multiline input
+                maxLines: 4,
                 onChanged: (value) {
                   setState(() {
                     description = value;
                   });
                 },
               ),
-              SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30),
+
+              // Add Button
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    fixedSize: Size(350, 30),
-                    backgroundColor: Colors.blue),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  fixedSize: const Size(350, 30),
+                  backgroundColor: Colors.blue,
+                ),
                 onPressed: () {
                   if (validateForm()) {
-                    // Proceed to submit form if validation passes
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Request successfully added!')),
+                    ResourceData.addResource(
+                      "Anonymous", // Placeholder for name
+                      "${startExperience!.toString()} - ${endExperience!.toString()} Years of Exp.",
+                      Valuechoose!,
+                      description, // Pass description correctly
                     );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Request successfully added!')),
+                    );
+                    Navigator.pop(context); // Go back to the previous screen after adding
                   }
                 },
                 child: Text(
