@@ -1,11 +1,13 @@
 // file: resource_screen.dart
 
-import 'package:even_managment/home/widget/resource%20details/fechresource.dart';
+import 'dart:convert'; // Needed for encoding/decoding JSON
+import 'package:even_managment/home/Deatails%20Screens/resource%20details/fechresource.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:even_managment/home/widget/resource%20details/addresource.dart';
-import 'package:even_managment/Screens/PDF/pdfscreen.dart'; // Ensure the path is correct
-import 'resource.dart';
+import 'package:even_managment/home/Deatails%20Screens/resource%20details/addresource.dart';
+import 'package:even_managment/Screens/PDF/pdfscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
+
 
 class ResourceScreen extends StatefulWidget {
   const ResourceScreen({super.key});
@@ -16,29 +18,39 @@ class ResourceScreen extends StatefulWidget {
 
 class _ResourceScreenState extends State<ResourceScreen> {
   // List of resources to display
-  List<Resource> resources = [
-    Resource(
-      name: 'John Deo',
-      experience: '5+ Years of Exp.',
-      technology: 'Graphic Designer',
-      phone: '+91 88665 88665',
-      resumePath:
-          'path/to/resume.pdf', // Update this with a real path if needed
-    ),
-    Resource(
-      name: 'Mark Johnson',
-      experience: '7+ Years of Exp.',
-      technology: 'React Developer',
-      phone: '+91 99887 99887',
-      resumePath:
-          'path/to/resume.jpg', // Update this with a real path if needed
-    ),
-  ];
+  List<Resource> resources = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadResources(); // Load resources from SharedPreferences when the app starts
+  }
+
+  // Step 3.1: Method to load resources from SharedPreferences
+  Future<void> _loadResources() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? resourcesJson = prefs.getString('resources');
+    
+    if (resourcesJson != null) {
+      List<dynamic> jsonData = jsonDecode(resourcesJson);
+      setState(() {
+        resources = jsonData.map((item) => Resource.fromJson(item)).toList();
+      });
+    }
+  }
+
+  // Step 3.2: Method to save resources to SharedPreferences
+  Future<void> _saveResources() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String resourcesJson = jsonEncode(resources.map((res) => res.toJson()).toList());
+    await prefs.setString('resources', resourcesJson);
+  }
 
   // Callback function to add a new resource
   void _addResource(Resource newResource) {
     setState(() {
       resources.add(newResource); // Add new resource to the list
+      _saveResources(); // Save the updated list to SharedPreferences
     });
   }
 

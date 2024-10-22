@@ -1,7 +1,7 @@
 // file: add_resource.dart
 
 import 'dart:io';
-import 'package:even_managment/home/widget/resource%20details/fechresource.dart';
+import 'package:even_managment/home/Deatails%20Screens/resource%20details/fechresource.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,7 +1,6 @@
-import 'package:even_managment/home/widget/request%20details/fechrequest.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
- // Import the ResourceData file
+import 'package:even_managment/home/Deatails%20Screens/request%20details/fechrequest.dart'; // Import RequestData
 
 class AddRequest extends StatefulWidget {
   const AddRequest({super.key});
@@ -171,7 +170,7 @@ class _AddRequestState extends State<AddRequest> {
                 ),
                 onPressed: () {
                   if (validateForm()) {
-                    ResourceData.addResource(
+                    RequestData.addResource(
                       "Anonymous", // Placeholder for name
                       "${startExperience!.toString()} - ${endExperience!.toString()} Years of Exp.",
                       Valuechoose!,

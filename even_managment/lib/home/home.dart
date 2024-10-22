@@ -1,8 +1,8 @@
 
-import 'package:even_managment/home/widget/home1.dart';
-import 'package:even_managment/home/widget/request.dart';
-import 'package:even_managment/home/widget/resource.dart';
-import 'package:even_managment/home/widget/settings.dart';
+import 'package:even_managment/home/Deatails%20Screens/Screens/home1.dart';
+import 'package:even_managment/home/Deatails%20Screens/Screens/request.dart';
+import 'package:even_managment/home/Deatails%20Screens/Screens/resource.dart';
+import 'package:even_managment/home/Deatails%20Screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
