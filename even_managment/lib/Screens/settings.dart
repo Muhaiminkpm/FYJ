@@ -9,12 +9,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  List<Widget> screen =[]
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Settings'),
-      ),
-    );
+        body: Container(
+      height: double.infinity,
+      width: 200,
+      color: Colors.grey,
+      child: ListView.builder(itemBuilder: ),
+    ));
   }
 }
