@@ -1,12 +1,14 @@
 // file: resource_screen.dart
 
 import 'dart:convert'; // Needed for encoding/decoding JSON
-import 'package:even_managment/home/Deatails%20Screens/resource%20details/fechresource.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:even_managment/home/Deatails%20Screens/resource%20details/addresource.dart';
-import 'package:even_managment/Screens/PDF/pdfscreen.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Import SharedPreferences
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../resource details/addresource.dart';
+import '../resource details/fechresource.dart';
+import 'pdfscreen.dart'; // Import SharedPreferences
 
 
 class ResourceScreen extends StatefulWidget {

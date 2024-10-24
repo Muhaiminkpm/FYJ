@@ -1,11 +1,12 @@
 
-import 'package:even_managment/home/Deatails%20Screens/Screens/home1.dart';
-import 'package:even_managment/home/Deatails%20Screens/Screens/request.dart';
-import 'package:even_managment/home/Deatails%20Screens/Screens/resource.dart';
-import 'package:even_managment/home/Deatails%20Screens/Screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../Screens/home1.dart';
+import '../Screens/request.dart';
+import '../Screens/resource.dart';
+import '../Screens/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -103,5 +104,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-//  if (titles[selectedIndex] == 'Updates' ||
-//                 titles[selectedIndex] == 'Calls')

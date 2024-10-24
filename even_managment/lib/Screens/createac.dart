@@ -28,6 +28,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
           key: _formkey,
           child: SingleChildScrollView(
             child:
+            
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(height: 150),
               const Center(

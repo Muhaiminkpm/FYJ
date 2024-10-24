@@ -1,5 +1,7 @@
-import 'package:even_managment/Screens/jobs/future.dart';
+
 import 'package:flutter/material.dart';
+
+import 'future.dart';
 
 class SuccesPage extends StatefulWidget {
   const SuccesPage({super.key});

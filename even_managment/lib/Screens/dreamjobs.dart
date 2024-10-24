@@ -1,5 +1,7 @@
-import 'package:even_managment/Screens/jobs/success.dart';
+
 import 'package:flutter/material.dart';
+
+import 'success.dart';
 
 class DreamJob extends StatefulWidget {
   const DreamJob({super.key});

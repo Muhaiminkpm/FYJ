@@ -1,9 +1,11 @@
 import 'dart:ui';
 
-import 'package:even_managment/Screens/jobs/dreamjobs.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'dreamjobs.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});

@@ -1,7 +1,10 @@
-import 'package:even_managment/Screens/Login/createac.dart';
 
 import 'package:even_managment/home/home.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../Provider/provider.dart';
+import 'createac.dart';
 
 class LogScreen extends StatefulWidget {
   const LogScreen({super.key});
@@ -75,6 +78,8 @@ class _LogScreenState extends State<LogScreen> {
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
+                      Provider.of<LoginState>(context, listen: false)
+                          .setLoggedIn(true);
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('Login  Successfully!')));
                       Navigator.push(
