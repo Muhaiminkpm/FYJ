@@ -80,7 +80,7 @@ and typesetting industry'''),
                                       builder: (context) =>
                                           const FuturePage()));
                             },
-                            child: Text(
+                            child: const Text(
                               'Next',
                               style: TextStyle(color: Colors.white),
                             ))

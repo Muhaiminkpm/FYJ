@@ -97,7 +97,7 @@ class _LogScreenState extends State<LogScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 240,
                 ),
                 GestureDetector(

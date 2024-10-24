@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Provider/provider.dart'; // import your provider
+
+import 'splashsceen.dart'; // import the welcome screen
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -25,27 +29,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'icon': Icons.notifications,
       'title': 'Notification Settings',
       'subtitle': 'Manage your notifications',
-      'trailing': Icon(Icons.arrow_forward_ios),
+      'trailing': const Icon(Icons.arrow_forward_ios),
     },
     {
       'icon': Icons.language,
       'title': 'Language',
       'subtitle': 'Change app language',
-      'trailing': Icon(Icons.arrow_forward_ios),
+      'trailing': const Icon(Icons.arrow_forward_ios),
     },
     {
       'icon': Icons.privacy_tip,
       'title': 'Privacy',
       'subtitle': 'Manage privacy settings',
-      'trailing': Icon(Icons.arrow_forward_ios),
+      'trailing': const Icon(Icons.arrow_forward_ios),
     },
     {
       'icon': Icons.security,
       'title': 'Security',
       'subtitle': 'Adjust security options',
-      'trailing': Icon(Icons.arrow_forward_ios),
+      'trailing': const Icon(Icons.arrow_forward_ios),
+    },
+    {
+      'icon': Icons.logout,
+      'title': 'Logout',
+      'subtitle': 'Logout from the app',
+      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null, // We'll set this in initState
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // Set the onTap function for the logout item
+    itemSettings.last['onTap'] = () => _confirmLogout(context);
+  }
+
+  void _confirmLogout(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirm Logout"),
+          content: const Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: const Text("Logout"),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Close the dialog
+                final loginState = Provider.of<LoginState>(context, listen: false);
+                await loginState.setLoggedIn(false); // Update login state
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(itemSettings[index]['title']),
             subtitle: Text(itemSettings[index]['subtitle']),
             trailing: itemSettings[index]['trailing'],
+            onTap: itemSettings[index]['onTap'], // Trigger respective actions
           );
         },
       ),

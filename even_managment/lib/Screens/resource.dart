@@ -87,8 +87,8 @@ class _ResourceScreenState extends State<ResourceScreen> {
             ),
           );
         },
-        child: const Icon(Icons.add, color: Colors.white),
         backgroundColor: Colors.blue,
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

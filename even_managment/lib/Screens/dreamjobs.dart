@@ -21,7 +21,7 @@ class _DreamJobState extends State<DreamJob> {
           children: [
             Image.asset(
               'asstes/dreem_job.png',
-              color: Color.fromARGB(162, 244, 241, 241),
+              color: const Color.fromARGB(162, 244, 241, 241),
               width: 400,
               fit: BoxFit.fitWidth,
             ),
@@ -80,7 +80,7 @@ and typesetting industry'''),
                                 MaterialPageRoute(
                                     builder: (context) => const SuccesPage()));
                           },
-                          child: Text(
+                          child: const Text(
                             'Next',
                             style: TextStyle(color: Colors.white),
                           ),

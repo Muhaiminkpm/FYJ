@@ -21,7 +21,7 @@ class _FuturePageState extends State<FuturePage> {
           children: [
             Image.asset(
               'asstes/Screenshot_2024-10-08_193219-removebg-preview.png',
-              color: Color.fromARGB(162, 244, 241, 241),
+              color: const Color.fromARGB(162, 244, 241, 241),
               width: 400,
               fit: BoxFit.fitWidth,
             ),

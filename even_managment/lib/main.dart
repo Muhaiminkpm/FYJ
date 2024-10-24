@@ -2,8 +2,8 @@ import 'package:even_managment/Screens/splashsceen.dart';
 import 'package:even_managment/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'Provider/provider.dart';
+import '../Provider/provider.dart'; // Import your provider
+ // Import home screen
 
 void main() {
   runApp(
@@ -26,7 +26,7 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     final loginState = Provider.of<LoginState>(context, listen: false);
-    loginState.loadLoginState();
+    loginState.loadLoginState(); // Load the login state from shared preferences
   }
 
   @override
