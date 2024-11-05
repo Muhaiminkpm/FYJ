@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../Screens/home1.dart';
 import '../Screens/request.dart';
 import '../Screens/resource.dart';
@@ -16,18 +14,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  List<Widget> Pages = [
+  final List<Widget> pages = [
     const HomeScreen(),
     const RequestScreen(),
     const ResourceScreen(),
     const SettingsScreen(),
   ];
-  List titles = [
+  final List<String> titles = [
     'Home',
     'Request',
     'Resource',
     'Settings',
-
   ];
 
   @override
@@ -35,37 +32,22 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        
-        // actions: [
-        //   Row(
-        //     children: [
-        //       const Icon(Icons.abc),
-        //       // const SizedBox(width: 10),
-        //       Text(titles[_currentIndex]),
-        //       // const SizedBox(width: 10),
-        //       const Icon(Icons.abc),
-        //     ],
-        //   ),
-
-        // ],
         leading: const Icon(Icons.menu),
-
         title: Column(children: [
-          const SizedBox(
-            width: 300,
-          ),
+          const SizedBox(width: 300),
           Text(
             titles[_currentIndex],
             style: GoogleFonts.ubuntu(),
           ),
         ]),
-
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.notification_add)),
+            onPressed: () {}, 
+            icon: const Icon(Icons.notification_add)
+          ),
         ],
       ),
-      body: Pages[_currentIndex],
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (value) {

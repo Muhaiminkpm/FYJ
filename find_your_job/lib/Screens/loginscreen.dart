@@ -1,9 +1,5 @@
-
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../Provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../home/home.dart';
 import 'createac.dart';
 
@@ -77,16 +73,19 @@ class _LogScreenState extends State<LogScreen> {
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10))),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formkey.currentState!.validate()) {
-                      Provider.of<LoginState>(context, listen: false)
-                          .setLoggedIn(true);
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Login  Successfully!')));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setBool('isLoggedIn', true);
+                      
+                      if (!context.mounted) return;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Login Successfully!')),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomePage()),
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Login Failed! ')),
@@ -98,18 +97,18 @@ class _LogScreenState extends State<LogScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  height: 240,
-                ),
+                const SizedBox(height: 240),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SingUpScreen()));
+                      context,
+                      MaterialPageRoute(builder: (context) => const SingUpScreen()),
+                    );
                   },
-                  child: const Text('Create a new account',
-                      style: TextStyle(color: Colors.blue)),
+                  child: const Text(
+                    'Create a new account',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 )
               ],
             ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'dreamjobs.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -12,12 +11,16 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const DreamJob()));
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 45, 117, 176),
       body: Padding(

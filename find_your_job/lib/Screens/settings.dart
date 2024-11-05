@@ -1,12 +1,7 @@
-import 'package:find_your_job/profile/profiledisplay.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../Provider/provider.dart'; // import your provider
-
-
-
-import 'splashsceen.dart'; // import the welcome screen
+import 'package:shared_preferences/shared_preferences.dart';
+import '../Screens/splashsceen.dart';
+import 'package:find_your_job/profile/profiledisplay.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -25,61 +20,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'onTap': null,
     },
     {
+      'icon': Icons.settings,
+      'title': 'Settings',
+      'subtitle': 'View and edit your settings',
+      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
+    },
+    {
       'icon': Icons.dark_mode,
-      'title': 'Theme Toggle',
-      'subtitle': 'Toggle dark mode on/off',
-      'trailing': CupertinoSwitch(
-        value: false,
-        onChanged: (bool value) {
-          // Implement dark mode toggle functionality
-        },
-      ),
+      'title': 'Dark Mode',
+      'subtitle': 'Toggle dark/light theme',
+      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
     },
     {
       'icon': Icons.notifications,
-      'title': 'Notification Settings',
-      'subtitle': 'Manage your notifications',
+      'title': 'Notifications',
+      'subtitle': 'Manage your notification preferences',
       'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
+    },
+    {
+      'icon': Icons.security,
+      'title': 'Privacy & Security',
+      'subtitle': 'Control your privacy settings',
+      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
+    },
+    {
+      'icon': Icons.color_lens,
+      'title': 'Appearance',
+      'subtitle': 'Customize app theme and display',
+      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
     },
     {
       'icon': Icons.language,
       'title': 'Language',
       'subtitle': 'Change app language',
       'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
     },
     {
-      'icon': Icons.privacy_tip,
-      'title': 'Privacy',
-      'subtitle': 'Manage privacy settings',
+      'icon': Icons.help_outline,
+      'title': 'Help & Support',
+      'subtitle': 'Get help and contact support',
       'trailing': const Icon(Icons.arrow_forward_ios),
-    },
-    {
-      'icon': Icons.security,
-      'title': 'Security',
-      'subtitle': 'Adjust security options',
-      'trailing': const Icon(Icons.arrow_forward_ios),
+      'onTap': null,
     },
     {
       'icon': Icons.logout,
       'title': 'Logout',
       'subtitle': 'Logout from the app',
       'trailing': const Icon(Icons.arrow_forward_ios),
-      'onTap': null, // We'll set this in initState
+      'onTap': null,
     },
   ];
 
   @override
   void initState() {
     super.initState();
-    // Set the onTap function for the profile item
     itemSettings[0]['onTap'] = () {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const ProfileDisplay()),
       );
     };
-    // Set the onTap function for the logout item
-    itemSettings.last['onTap'] = () => _confirmLogout(context);
+
+    itemSettings[8]['onTap'] = () => _confirmLogout(context);
   }
 
   void _confirmLogout(BuildContext context) {
@@ -93,16 +101,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             TextButton(
               child: const Text("Cancel"),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: const Text("Logout"),
               onPressed: () async {
-                Navigator.of(context).pop(); // Close the dialog
-                final loginState =
-                    Provider.of<LoginState>(context, listen: false);
-                loginState.setLoggedIn(false); // Update login state
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('isLoggedIn', false);
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -131,7 +138,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: Text(itemSettings[index]['title']),
             subtitle: Text(itemSettings[index]['subtitle']),
             trailing: itemSettings[index]['trailing'],
-            onTap: itemSettings[index]['onTap'], // Trigger respective actions
+            onTap: itemSettings[index]['onTap'],
           );
         },
       ),
