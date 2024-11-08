@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'modelprofile.dart';
 import 'profile.dart';
-import 'sharedpreference.dart';
+import '../SharedPreferences/sharedpreference.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';

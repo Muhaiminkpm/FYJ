@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'modelprofile.dart';
-import 'sharedpreference.dart';
+import '../SharedPreferences/sharedpreference.dart';
 import 'resumepick.dart';
 import 'profiledisplay.dart';
 

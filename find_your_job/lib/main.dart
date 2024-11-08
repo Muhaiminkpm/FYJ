@@ -1,9 +1,19 @@
+import 'package:find_your_job/DarkMode/darkmode.dart';
+import 'package:find_your_job/Provider/provider.dart';
+import 'package:find_your_job/Screens/splashsceen.dart';
+import 'package:find_your_job/home/home.dart';
 import 'package:flutter/material.dart';
-import 'Screens/splashsceen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MainApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => UserProvider()),
+      ChangeNotifierProvider(create: (context) => ThemeProvider()),
+    ],
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -11,9 +21,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final userProvider = Provider.of<UserProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      themeMode: themeProvider.themeMode,
+      home: userProvider.isLoggedIn ? const HomePage() : const WelcomeScreen(),
     );
   }
 }

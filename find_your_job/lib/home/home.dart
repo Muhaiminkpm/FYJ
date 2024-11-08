@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Screens/home1.dart';
-import '../Screens/request.dart';
-import '../Screens/resource.dart';
-import '../Screens/settings.dart';
+import '../Bottan Navigatoin/home1.dart';
+import '../Bottan Navigatoin/request.dart';
+import '../Bottan Navigatoin/resource.dart';
+import '../Bottan Navigatoin/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

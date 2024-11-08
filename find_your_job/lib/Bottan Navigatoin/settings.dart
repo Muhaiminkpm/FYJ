@@ -1,4 +1,6 @@
+import 'package:find_your_job/DarkMode/darkmode.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Screens/splashsceen.dart';
 import 'package:find_your_job/profile/profiledisplay.dart';
@@ -29,8 +31,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     {
       'icon': Icons.dark_mode,
       'title': 'Dark Mode',
-      'subtitle': 'Toggle dark/light theme',
-      'trailing': const Icon(Icons.arrow_forward_ios),
+      'subtitle': 'Toggle between light and dark themes',
+      'trailing': ToggleButtons(
+        children: [
+          const Icon(Icons.wb_sunny, color: Colors.yellow),
+          Icon(Icons.nightlight_round, color: Colors.blue),
+        ],
+        isSelected: [false, true],
+        onPressed: (int index) {
+          
+          // final provider = Provider.of<ThemeProvider>(context, listen: false);
+          // provider.toggleTheme(index == 1);
+        },
+      ),
       'onTap': null,
     },
     {
@@ -87,6 +100,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
     };
 
+    itemSettings[2]['onTap'] = () {
+      final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+      bool isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+      themeProvider.toggleTheme(!isDarkMode); // Toggle theme
+    };
+
     itemSettings[8]['onTap'] = () => _confirmLogout(context);
   }
 
@@ -128,7 +147,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
         body: Container(
       height: double.infinity,
-      width: 200,
+      width: 300,
       color: Colors.grey,
       child: ListView.builder(
         itemCount: itemSettings.length,

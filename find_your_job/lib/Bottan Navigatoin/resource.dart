@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../resource details/addresource.dart';
 import '../resource details/fechresource.dart';
-import 'pdfscreen.dart'; // Import SharedPreferences
+import '../Screens/pdfscreen.dart'; // Import SharedPreferences
 
 
 class ResourceScreen extends StatefulWidget {
