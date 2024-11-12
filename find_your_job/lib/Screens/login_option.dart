@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'loginscreen.dart';
+import 'login_screen.dart';
 
 class LoginOption extends StatefulWidget {
   const LoginOption({super.key});

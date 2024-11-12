@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'modelprofile.dart';
+import 'model_profile.dart';
+
 import '../SharedPreferences/sharedpreference.dart';
-import 'resumepick.dart';
-import 'profiledisplay.dart';
+import 'profile_display.dart';
+import 'resume_pick.dart';
+
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -161,11 +163,11 @@ class _MyProfileState extends State<MyProfile> {
                           ? FileImage(File(_imageFile!.path))
                           : null,
                       backgroundColor: Colors.grey[300],
+                      radius: 60,
                       child: _imageFile == null
                           ? const Icon(Icons.person,
                               size: 60, color: Colors.grey)
                           : null,
-                      radius: 60,
                     ),
                     Positioned(
                       bottom: 0,

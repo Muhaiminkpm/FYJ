@@ -1,6 +1,7 @@
 import 'package:find_your_job/Search%20Job/jobsearch.dart';
-import 'package:find_your_job/Search%20Locality/searchlocality.dart';
+import 'package:find_your_job/Search%20Locality/search_locality.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 // Import the screen you want to navigate to
 
 class HomeScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool showMyResources = false;// Track which resource type is shown
+  bool showMyResources = false; // Track which resource type is shown
 
   @override
   Widget build(BuildContext context) {
@@ -19,72 +20,88 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white70,
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromARGB(221, 145, 140, 140),
-                blurRadius: 20,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(221, 145, 140, 140),
+                    blurRadius: 20,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(10),
               ),
-            ],
-            borderRadius: BorderRadius.circular(10),
-          ),
-          height: 80,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the desired screen when the first row is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const JobSearch()), // Replace with your target screen
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(
-                        width: 10,
+              height: 80,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to the desired screen when the first row is tapped
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const JobSearch()), // Replace with your target screen
+                        );
+                      },
+                      child: const Row(
+                        children: [
+                          Icon(Icons.search),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Job title, keyword, or company',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Job title, keyword, or company',
-                        style: TextStyle(color: Colors.black),
+                    ),
+                    const Divider(),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to the desired screen when the second row is tapped
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SearchLocation()), // Replace with your target screen
+                        );
+                      },
+                      child: const Row(
+                        children: [
+                          Icon(Icons.location_on),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Enter city or locality',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const Divider(),
-                GestureDetector(
-                  onTap: () {
-                    // Navigate to the desired screen when the second row is tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const SearchLocation()), // Replace with your target screen
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.location_on),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Enter city or locality',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            SizedBox(height: 30),
+            Text(
+              'Jobs for you ',
+              style: GoogleFonts.aBeeZee(
+                  fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Jobs based on your activity on Indeed ',
+              style: GoogleFonts.aBeeZee(),
+            )
+          ],
         ),
       ),
     );

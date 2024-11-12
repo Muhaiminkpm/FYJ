@@ -2,7 +2,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../profile/modelprofile.dart';
+import '../profile/model_profile.dart';
+
 
 class SharedPreferencesHelper {
   static const String _profileKey = 'user_profile';

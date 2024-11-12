@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'loginoption.dart';
+import 'login_option.dart';
 
 class FuturePage extends StatefulWidget {
   const FuturePage({super.key});

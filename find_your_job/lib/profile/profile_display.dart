@@ -1,21 +1,22 @@
 // lib/screens/profile_display.dart
 
 import 'package:flutter/material.dart';
-import 'modelprofile.dart';
+import 'model_profile.dart';
+
 import 'profile.dart';
 import '../SharedPreferences/sharedpreference.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/foundation.dart';
+
 import 'dart:io';
 import 'package:path/path.dart' as path;
 
 import 'resume_viewer.dart';
 
 class ProfileDisplay extends StatefulWidget {
-  const ProfileDisplay({Key? key}) : super(key: key);
+  const ProfileDisplay({super.key});
 
   @override
   State<ProfileDisplay> createState() => _ProfileDisplayState();
@@ -89,7 +90,8 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                               if (mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Failed to load profile image'),
+                                    content:
+                                        Text('Failed to load profile image'),
                                   ),
                                 );
                               }

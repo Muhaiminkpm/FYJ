@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 class ResumeViewer extends StatelessWidget {
   final String resumePath;
 
-  const ResumeViewer({Key? key, required this.resumePath}) : super(key: key);
+  const ResumeViewer({super.key, required this.resumePath});
 
   bool get isPDF => path.extension(resumePath).toLowerCase() == '.pdf';
 

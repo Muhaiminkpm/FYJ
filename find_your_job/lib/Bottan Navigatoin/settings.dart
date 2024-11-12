@@ -1,11 +1,13 @@
-import 'package:find_your_job/DarkMode/darkmode.dart';
+import 'package:find_your_job/DarkMode/dark_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Screens/splashsceen.dart';
-import 'package:find_your_job/profile/profiledisplay.dart';
+import '../Screens/splash_sceen.dart';
 
-class SettingsScreen extends StatefulWidget {
+
+
+
+import '../profile/profile_display.dart';class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   @override
@@ -33,16 +35,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'title': 'Dark Mode',
       'subtitle': 'Toggle between light and dark themes',
       'trailing': ToggleButtons(
-        children: [
-          const Icon(Icons.wb_sunny, color: Colors.yellow),
-          Icon(Icons.nightlight_round, color: Colors.blue),
-        ],
-        isSelected: [false, true],
+        isSelected: const [false, true],
         onPressed: (int index) {
           
           // final provider = Provider.of<ThemeProvider>(context, listen: false);
           // provider.toggleTheme(index == 1);
         },
+        children: [
+          const Icon(Icons.wb_sunny, color: Colors.yellow),
+          Icon(Icons.nightlight_round, color: Colors.blue),
+        ],
       ),
       'onTap': null,
     },

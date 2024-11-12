@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ResumePicker extends StatelessWidget {
   final Function(String) onFilePicked;
 
-  const ResumePicker({Key? key, required this.onFilePicked}) : super(key: key);
+  const ResumePicker({super.key, required this.onFilePicked});
 
   Future<void> _pickFile(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(
