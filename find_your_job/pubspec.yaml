@@ -74,6 +74,7 @@ flutter:
    - asset\success_man.png
    - asset\future rocket.png
    - asset\job icon.png
+   - asset\search background.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

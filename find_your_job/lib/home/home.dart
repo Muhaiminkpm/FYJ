@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   ];
   final List<String> titles = [
     'Home',
-    'Request',
+    'My jobs',
     'Resource',
     'Settings',
   ];
@@ -36,15 +36,13 @@ class _HomePageState extends State<HomePage> {
         title: Column(children: [
           const SizedBox(width: 300),
           Text(
-            titles[_currentIndex],
+            'FYJ',
             style: GoogleFonts.ubuntu(),
           ),
         ]),
         actions: [
           IconButton(
-            onPressed: () {}, 
-            icon: const Icon(Icons.notification_add)
-          ),
+              onPressed: () {}, icon: const Icon(Icons.notification_add)),
         ],
       ),
       body: pages[_currentIndex],
