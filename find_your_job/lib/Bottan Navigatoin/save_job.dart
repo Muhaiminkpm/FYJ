@@ -11,14 +11,14 @@ import '../resource details/fechresource.dart';
 import '../Screens/pdf_screen.dart'; // Import SharedPreferences
 
 
-class ResourceScreen extends StatefulWidget {
-  const ResourceScreen({super.key});
+class SaveJob extends StatefulWidget {
+  const SaveJob({super.key});
 
   @override
-  State<ResourceScreen> createState() => _ResourceScreenState();
+  State<SaveJob> createState() => _SaveJobState();
 }
 
-class _ResourceScreenState extends State<ResourceScreen> {
+class _SaveJobState extends State<SaveJob> {
   // List of resources to display
   List<Resource> resources = [];
 

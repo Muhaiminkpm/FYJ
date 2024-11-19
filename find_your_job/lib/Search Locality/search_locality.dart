@@ -39,7 +39,7 @@ class _SearchLocationState extends State<SearchLocation> {
 
       // Get the current location
       _currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
+         desiredAccuracy: LocationAccuracy.low);
 
       setState(() {
         _currentAddress =

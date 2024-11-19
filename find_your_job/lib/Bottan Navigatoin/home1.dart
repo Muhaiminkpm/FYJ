@@ -13,21 +13,30 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool showMyResources = false;
+  List<Image> setImage = [
+    Image.asset('asset/google 1.png'),
+    Image.asset('asset/dribbble 1.png'),
+    Image.asset('asset/google 1.png'),
+    Image.asset('asset/dribbble 1.png')
+  ];
+  List<dynamic> chooseCategary = [
+    'Senior designer',
+    'Designer',
+    'Full-time',
+    'Part-time',
+    'Flutter developer'
+  ];
   List<String> resourceTypes = [
-    'Flutter Developer',
-    'Flutter Developer Intern',
-    'Laravel,Flutter,Digital Marketing ',
+    'UI/UX Designer',
+    'Lead Designer',
+    'Digital Marketing ',
     'Flutter Developer '
   ];
   List<String> companyNames = [
-    '''Spanixo LLP
-Ramanattukara,Calicut,Kerala ''',
-    '''Spanixo LLP
-Ramanattukara,Calicut,Kerala ''',
-    '''Spanixo LLP
-Ramanattukara,Calicut,Kerala ''',
-    '''Spanixo LLP
-Ramanattukara,Calicut,Kerala ''',
+    "Spanixo LLP . Calicut,Kerala ",
+    "Spanixo LLP . Calicut,Kerala ",
+    "Spanixo LLP . Calicut,Kerala ",
+    "Spanixo LLP . Calicut,Kerala ",
   ];
 
   @override
@@ -56,7 +65,7 @@ Ramanattukara,Calicut,Kerala ''',
                                   const JobSearch()), // Replace with your target screen
                         );
                       },
-                      child: Row(
+                      child: const Row(
                         children: [
                           SizedBox(width: 10),
                           Icon(Icons.search),
@@ -71,14 +80,13 @@ Ramanattukara,Calicut,Kerala ''',
                     ),
                   ),
                 ),
-
                 Positioned(
                   left: 30,
                   right: 30,
                   height: 30,
                   bottom: 90,
                   child: Container(
-                    child: GestureDetector(
+                    child:GestureDetector(
                       onTap: () {
                         // Navigate to the desired screen when the container is tapped
                         Navigator.push(
@@ -88,7 +96,7 @@ Ramanattukara,Calicut,Kerala ''',
                                   const JobSearch()), // Replace with your target screen
                         );
                       },
-                      child: Row(
+                      child: const Row(
                         children: [
                           SizedBox(width: 10),
                           Icon(Icons.location_on),
@@ -104,6 +112,26 @@ Ramanattukara,Calicut,Kerala ''',
                   ),
                 )
               ]),
+              Container(
+                height: 30,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: chooseCategary.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 208, 201, 201),
+                            borderRadius: BorderRadius.circular(5)),
+                        width: chooseCategary[index].length * 10.0,
+                        child: Center(child: Text(chooseCategary[index])),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
               //single child sroll veiw , card - horizondal
               // Text(
               //   'Jobs for you ',
@@ -132,9 +160,20 @@ Ramanattukara,Calicut,Kerala ''',
                         ],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  child: setImage[index],
+                                ),
+                                SizedBox(width: 250),
+                                Icon(Icons.bookmark_border),
+                              ],
+                            ),
                             ListTile(
                               title: Text(
                                 resourceTypes[index],
@@ -142,18 +181,33 @@ Ramanattukara,Calicut,Kerala ''',
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               subtitle: Text(companyNames[index]),
-                              trailing: const Column(
-                                children: [
-                                  Icon(Icons.bookmark_border),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Icon(Icons.block)
-                                ],
-                              ),
                               onTap: () {
                                 // Handle tap on each type
                               },
+                            ),
+                            Container(
+                              height: 30,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: chooseCategary.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              247, 251, 249, 249),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      width:
+                                          chooseCategary[index].length * 10.0,
+                                      child: Center(
+                                          child: Text(chooseCategary[index])),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

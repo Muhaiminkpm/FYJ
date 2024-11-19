@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Bottan Navigatoin/home1.dart';
 import '../Bottan Navigatoin/request.dart';
-import '../Bottan Navigatoin/resource.dart';
+import '../Bottan Navigatoin/save_job.dart';
 import '../Bottan Navigatoin/settings.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,13 +17,13 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> pages = [
     const HomeScreen(),
     const RequestScreen(),
-    const ResourceScreen(),
+    const SaveJob(),
     const SettingsScreen(),
   ];
   final List<String> titles = [
     'Home',
     'My jobs',
-    'Resource',
+    'Save job',
     'Settings',
   ];
 
@@ -67,12 +67,12 @@ class _HomePageState extends State<HomePage> {
               Icons.edit_note,
               color: Colors.black,
             ),
-            label: 'Request',
+            label: 'My job',
           ),
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
-              icon: Icon(Icons.category),
-              label: "Resource"),
+              icon: Icon(Icons.bookmark),
+              label: "Save Job"),
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
               icon: Icon(Icons.settings),
