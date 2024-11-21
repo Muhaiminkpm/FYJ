@@ -77,6 +77,16 @@ flutter:
    - asset\search background.png
    - asset\google 1.png
    - asset\dribbble 1.png
+   - asset\home.png
+   - asset\messsage.png
+   - asset\connections.png
+   - asset\booksmart.png
+   - asset\splash_icon.png
+   - asset\Vector.png
+   - asset\searchjob.png
+
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

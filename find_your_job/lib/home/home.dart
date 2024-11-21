@@ -1,9 +1,12 @@
+import '../Screen/Job_save.dart';
+import '../Settings/add_profile.dart';
+import '../Screen/connection_others.dart';
+import '../Profile/profile_display.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Bottan Navigatoin/home1.dart';
-import '../Bottan Navigatoin/request.dart';
-import '../Bottan Navigatoin/save_job.dart';
-import '../Bottan Navigatoin/settings.dart';
+import '../Screen/home1.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,15 +19,17 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> pages = [
     const HomeScreen(),
-    const RequestScreen(),
-    const SaveJob(),
-    const SettingsScreen(),
+    const ConnectOther(),
+    const ProfileDisplay(),
+    const AddProfile(),
+    const SelectJob(),
   ];
   final List<String> titles = [
     'Home',
+    'Connections',
+    'Add Profile',
     'My jobs',
     'Save job',
-    'Settings',
   ];
 
   @override
@@ -53,34 +58,33 @@ class _HomePageState extends State<HomePage> {
             _currentIndex = value;
           });
         },
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
-              icon: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
+              icon: Image.asset('asset/home.png', color: Colors.black),
               label: 'Home'),
           BottomNavigationBarItem(
             backgroundColor: Colors.white,
-            icon: Icon(
-              Icons.edit_note,
+            icon: Image.asset(
+              'asset/connections.png',
               color: Colors.black,
             ),
-            label: 'My job',
+            label: 'Conne',
           ),
+          const BottomNavigationBarItem(
+              backgroundColor: Colors.white,
+              icon: CircleAvatar(
+                child: Icon(Icons.add),
+              ),
+              label: "Add Profile"),
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
-              icon: Icon(Icons.bookmark),
-              label: "Save Job"),
+              icon: Image.asset('asset/messsage.png', color: Colors.black),
+              label: "Massage"),
           BottomNavigationBarItem(
-              backgroundColor: Colors.white,
-              icon: Icon(Icons.settings),
-              label: "Settings"),
+              icon: Image.asset('asset/booksmart.png', color: Colors.black),
+              label: "Save Job")
         ],
-        showUnselectedLabels: true,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
       ),
     );
   }

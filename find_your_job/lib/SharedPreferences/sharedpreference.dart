@@ -2,7 +2,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../profile/model_profile.dart';
+import '../Profile/model_profile.dart';
 
 
 class SharedPreferencesHelper {

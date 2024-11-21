@@ -1,4 +1,4 @@
-import 'package:find_your_job/Search%20Job/jobsearch.dart';
+import '../Search Job/jobsearch.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -143,78 +143,80 @@ class _HomeScreenState extends State<HomeScreen> {
               //   'Jobs based on your activity on Indeed ',
               //   style: GoogleFonts.aBeeZee(),
               // ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: resourceTypes.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(221, 228, 230, 229),
-                            blurRadius: 20,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  child: setImage[index],
-                                ),
-                                SizedBox(width: 250),
-                                Icon(Icons.bookmark_border),
-                              ],
-                            ),
-                            ListTile(
-                              title: Text(
-                                resourceTypes[index],
-                                style: GoogleFonts.aBeeZee(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              subtitle: Text(companyNames[index]),
-                              onTap: () {
-                                // Handle tap on each type
-                              },
-                            ),
-                            Container(
-                              height: 30,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: chooseCategary.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              247, 251, 249, 249),
-                                          borderRadius:
-                                              BorderRadius.circular(5)),
-                                      width:
-                                          chooseCategary[index].length * 10.0,
-                                      child: Center(
-                                          child: Text(chooseCategary[index])),
-                                    ),
-                                  );
-                                },
-                              ),
+              SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: resourceTypes.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(221, 228, 230, 229),
+                              blurRadius: 20,
                             ),
                           ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    child: setImage[index],
+                                  ),
+                                  SizedBox(width: 250),
+                                  Icon(Icons.bookmark_border),
+                                ],
+                              ),
+                              ListTile(
+                                title: Text(
+                                  resourceTypes[index],
+                                  style: GoogleFonts.aBeeZee(
+                                      fontWeight: FontWeight.bold, fontSize: 20),
+                                ),
+                                subtitle: Text(companyNames[index]),
+                                onTap: () {
+                                  // Handle tap on each type
+                                },
+                              ),
+                              Container(
+                                height: 30,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: chooseCategary.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                247, 251, 249, 249),
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        width:
+                                            chooseCategary[index].length * 10.0,
+                                        child: Center(
+                                            child: Text(chooseCategary[index])),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ]),
           ),

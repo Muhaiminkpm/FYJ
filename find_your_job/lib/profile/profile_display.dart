@@ -1,5 +1,6 @@
 // lib/screens/profile_display.dart
 
+import '../Settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'model_profile.dart';
 
@@ -53,65 +54,118 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile Display'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MyProfile()),
-              );
-              _loadProfile(); // Reload profile after returning from edit screen
-            },
-          ),
-        ],
-      ),
       body: RefreshIndicator(
         onRefresh: _loadProfile,
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Profile Header
-              Center(
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: _profile!.imagePath != null
-                          ? FileImage(File(_profile!.imagePath!))
-                          : null,
-                      onBackgroundImageError: _profile!.imagePath != null
-                          ? (exception, stackTrace) {
-                              print('Error loading image: $exception');
-                              if (mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content:
-                                        Text('Failed to load profile image'),
-                                  ),
-                                );
-                              }
-                            }
-                          : null,
-                      child: _profile!.imagePath == null
-                          ? const Icon(Icons.person, size: 50)
-                          : null,
+              Stack(
+                children: [
+                  Image.asset('asset/search background.png'),
+                  Positioned(
+                    top: 50,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundImage: _profile!.imagePath != null
+                                    ? FileImage(File(_profile!.imagePath!))
+                                    : null,
+                                onBackgroundImageError:
+                                    _profile!.imagePath != null
+                                        ? (exception, stackTrace) {
+                                            print(
+                                                'Error loading image: $exception');
+                                            if (mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                const SnackBar(
+                                                  content: Text(
+                                                      'Failed to load profile image'),
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        : null,
+                                child: _profile!.imagePath == null
+                                    ? const Icon(Icons.person, size: 50)
+                                    : null,
+                              ),
+                              const SizedBox(height: 5),
+                              Text(_profile!.name,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(
+                                          fontSize: 15, color: Colors.white)),
+                              Text(_profile!.location,
+                                  style: const TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 130,
+                          ),
+                          Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsScreen()));
+                                },
+                                icon: const Icon(Icons.settings),
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyProfile()));
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Edit Profile',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Icon(
+                                      Icons.border_color,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  backgroundColor:
+                                      const Color.fromARGB(20, 255, 255, 255),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      _profile!.name,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    Text(
-                      _profile!.email,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
-                ),
+                  ),
+
+                  // Text(
+                  //   _profile!.email,
+                  //   style: Theme.of(context).textTheme.bodyLarge,
+                  // ),
+                ],
               ),
               const SizedBox(height: 24),
 

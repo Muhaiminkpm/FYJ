@@ -1,7 +1,7 @@
-import 'package:find_your_job/DarkMode/dark_mode.dart';
-import 'package:find_your_job/Provider/provider.dart';
-import 'package:find_your_job/Screens/splash_sceen.dart';
-import 'package:find_your_job/home/home.dart';
+import 'DarkMode/dark_mode.dart';
+import 'Provider/provider.dart';
+import 'Welcome/splash_sceen.dart';
+import 'home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -2,13 +2,15 @@
 
 import 'dart:convert'; // Needed for encoding/decoding JSON
 
+import 'package:find_your_job/NoUse/pdf_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../resource details/addresource.dart';
-import '../resource details/fechresource.dart';
-import '../Screens/pdf_screen.dart'; // Import SharedPreferences
+
+import 'resource details/addresource.dart';
+import 'resource details/fechresource.dart';
+ // Import SharedPreferences
 
 
 class SaveJob extends StatefulWidget {
