@@ -1,14 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'model_profile.dart';
-
 import '../SharedPreferences/sharedpreference.dart';
 import 'profile_display.dart';
 import 'resume_pick.dart';
-
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
