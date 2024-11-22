@@ -12,7 +12,7 @@ class _ConnectOtherState extends State<ConnectOther> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('connect others'),
+        child: Text('connect Others'),
       ),
     );
   }

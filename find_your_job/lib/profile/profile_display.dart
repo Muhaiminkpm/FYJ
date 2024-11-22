@@ -1,6 +1,7 @@
 // lib/screens/profile_display.dart
 
-import '../Settings/settings.dart';
+
+import 'package:find_your_job/Settings/add_profile.dart';
 import 'package:flutter/material.dart';
 import 'model_profile.dart';
 
@@ -120,7 +121,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const SettingsScreen()));
+                                              const AddProfile()));
                                 },
                                 icon: const Icon(Icons.settings),
                                 color: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PasswordUpdate extends StatefulWidget {
   const PasswordUpdate({super.key});
@@ -10,9 +11,15 @@ class PasswordUpdate extends StatefulWidget {
 class _PasswordUpdateState extends State<PasswordUpdate> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Update Password"),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text(
+            "Update Password",
+            style: GoogleFonts.aBeeZee(fontWeight: FontWeight.normal),
+          )
+        ],
       ),
     );
   }
