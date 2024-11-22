@@ -1,8 +1,9 @@
 // lib/screens/profile_display.dart
+
+import 'package:find_your_job/Profile/model_profile.dart';
 import 'package:find_your_job/Settings/add_profile.dart';
-import 'package:find_your_job/Settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'model_profile.dart';
+import 'profile.dart';
 import '../SharedPreferences/sharedpreference.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
@@ -30,7 +31,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
   Future<void> _loadProfile() async {
     final profile = await SharedPreferencesHelper.getProfile();
     setState(() {
-      _profile = profile  ;
+      _profile = profile;
     });
   }
 
@@ -128,7 +129,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SettingsScreen()));
+                                          builder: (context) => MyProfile()));
                                 },
                                 child: Row(
                                   children: [
