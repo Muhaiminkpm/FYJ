@@ -39,7 +39,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   provider: ^6.1.2
-  flutter_switch: ^0.3.2
+  
   geolocator: ^13.0.1
   
 
@@ -85,7 +85,7 @@ flutter:
    - asset\Vector.png
    - asset\searchjob.png
    - asset\forget password.png
-
+   - asset\check email.png
 
 
 

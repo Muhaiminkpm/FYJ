@@ -1,5 +1,8 @@
+import 'package:find_your_job/Welcome/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../home/home.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -21,7 +24,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'WELCOME BACK',
+                  'Forget Password?',
                   style: GoogleFonts.aBeeZee(
                       fontWeight: FontWeight.bold, fontSize: 20),
                 ),
@@ -30,14 +33,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 ),
                 Text('''       Lorem ipsum dolor sit amet, consectetur    
             adipiscing  elit, sed do eiusmod tempor'''),
-            const SizedBox(
-              height: 30,
-            ),
-            Image.asset('asset/forget password.png'),
+                const SizedBox(
+                  height: 30,
+                ),
+                Image.asset('asset/forget password.png'),
               ],
             ),
-            
-             const SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Text(
@@ -54,91 +56,83 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Text('Password',
-                style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold)),
-            SizedBox(
-              height: 10,
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
+            
             SizedBox(
               height: 20,
-            ),
-            Row(
-              children: [
-                Text('Remember me'),
-                SizedBox(
-                  width: 70,
-                ),
-                Text(
-                  'Forget Password ?',
-                  style: GoogleFonts.aBeeZee(fontWeight: FontWeight.normal),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Login',
-                    style: GoogleFonts.aBeeZee(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: const Color.fromARGB(255, 18, 15, 115),
-                    fixedSize: const Size(300, 50), // Set width and height
-                  ),
+                UseElevated(name: 'RESET PASSWORD',onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                selectColor: const Color.fromARGB(255, 18, 15, 115),),
+                SizedBox(
+                  height: 20,
                 ),
-                SizedBox(height: 20,),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'UPDATE',
-                    style: GoogleFonts.aBeeZee(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: const Color.fromARGB(255, 18, 15, 115),
-                    fixedSize: const Size(300, 50),
-                  ),
-
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  children: [
-                    SizedBox(width: 30,),
-                    Text('You dont have an account yet?  '),
-                    GestureDetector(
-                      
-                      child: Text('Sign on',
-                      style: GoogleFonts.abel(
-                        color: Colors.blue
-                      ),),
-                      )
-                  ],
-                )
+                //Update button
+                UseElevated(name: 'BACK TO LOGIN', onPressed: () {
+                  Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const LoginScreen()));
+                },
+                selectColor: const Color.fromARGB(255, 18, 15, 115),),
+               
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class UseElevated extends StatelessWidget {
+  const UseElevated({
+    super.key,
+    required this.name,
+    required this.onPressed,
+    required this.selectColor,
+  });
+  final Color selectColor;
+  final String name;
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(name, style: GoogleFonts.aBeeZee(
+        color: Colors.white
+      ),),
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        backgroundColor: selectColor,
+        fixedSize: const Size(300, 50),
+      ),
+    );
+  }
+}
+
+class UseGestureDetector extends StatelessWidget {
+  const UseGestureDetector({
+    super.key,
+    required this.name,
+    required this.onTap,
+    required this.itemColor,
+  });
+  final String name;
+  final Function() onTap;
+  final Color itemColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Text(
+        name,
+        style: GoogleFonts.abel(color: itemColor),
+      ),
+      onTap: onTap,
     );
   }
 }

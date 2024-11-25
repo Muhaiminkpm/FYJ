@@ -1,4 +1,5 @@
 import 'package:find_your_job/Welcome/forgetpassword.dart';
+import 'package:find_your_job/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>const ForgetPassword()));
+                            builder: (context) => const ForgetPassword()));
                   },
                 ),
               ],
@@ -98,35 +99,23 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Login',
-                    style: GoogleFonts.aBeeZee(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: const Color.fromARGB(255, 18, 15, 115),
-                    fixedSize: const Size(300, 50), // Set width and height
-                  ),
-                ),
+                UseElevated(
+                    name: 'Login',
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                    selectColor: const Color.fromARGB(255, 18, 15, 115)),
                 SizedBox(
                   height: 20,
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    'UPDATE',
-                    style: GoogleFonts.aBeeZee(color: Colors.white),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    backgroundColor: const Color.fromARGB(255, 18, 15, 115),
-                    fixedSize: const Size(300, 50),
-                  ),
-                ),
+                UseElevated(
+                    name: 'Continue with Google',
+                   onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
+                    selectColor: const Color.fromARGB(255, 18, 15, 115)),
                 SizedBox(
                   height: 20,
                 ),
@@ -136,18 +125,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 30,
                     ),
                     Text('You dont have an account yet?  '),
-                    GestureDetector(
-                      child: Text(
-                        'Sign up',
-                        style: GoogleFonts.abel(color: Colors.blue),
-                      ),
-                      onTap: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreateAccount()));
-                  },
-                    )
+                    UseGestureDetector(
+                        itemColor: Colors.orange,
+                        name: 'Sign up',
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CreateAccount()));
+                        })
                   ],
                 )
               ],

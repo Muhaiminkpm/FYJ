@@ -1,8 +1,7 @@
+
 import 'package:find_your_job/Welcome/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
 
 class DreamJob extends StatefulWidget {
   const DreamJob({super.key});
@@ -22,6 +21,7 @@ class _DreamJobState extends State<DreamJob> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+           
             Stack(children: [
               Image.asset(
                 'asset/Vector.png',
