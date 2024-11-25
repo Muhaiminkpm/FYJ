@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../NoUse/dream_jobs.dart';
+import 'dream_jobs.dart';
 
 
 class WelcomeScreen extends StatefulWidget {
