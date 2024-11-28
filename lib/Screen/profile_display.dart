@@ -3,14 +3,14 @@
 import 'package:find_your_job/Profile/model_profile.dart';
 import 'package:find_your_job/Settings/settings.dart';
 import 'package:flutter/material.dart';
-import 'profile.dart';
+import '../profile/profile.dart';
 import '../SharedPreferences/sharedpreference.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:io';
 import 'package:path/path.dart' as path;
-import 'resume_viewer.dart';
+import '../profile/resume_viewer.dart';
 
 class ProfileDisplay extends StatefulWidget {
   const ProfileDisplay({super.key});
@@ -55,6 +55,7 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Profile Header
               Stack(
@@ -185,27 +186,24 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
 
               // Skills
               Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Skills',
-                          style: Theme.of(context).textTheme.titleLarge),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8.0,
-                        runSpacing: 8.0,
-                        children: _profile!.skills.map((skill) {
-                          return Chip(
-                            label: Text(skill),
-                            backgroundColor:
-                                Theme.of(context).colorScheme.primaryContainer,
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Skills',
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 8.0,
+                      children: _profile!.skills.map((skill) {
+                        return Chip(
+                          label: Text(skill),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
+                        );
+                      }).toList(),
+                    ),
+                  ],
                 ),
               ),
 
@@ -247,38 +245,38 @@ class _ProfileDisplayState extends State<ProfileDisplay> {
               const SizedBox(height: 16),
 
               // Education Section
-              if (_profile!.education.isNotEmpty)
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Education',
-                            style: Theme.of(context).textTheme.titleLarge),
-                        const SizedBox(height: 8),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: _profile!.education.length,
-                          itemBuilder: (context, index) {
-                            final edu = _profile!.education[index];
-                            return ListTile(
-                              title: Text(edu.degree),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(edu.institution),
-                                  Text('Graduated: ${edu.graduationYear}'),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              // if (_profile!.education.isNotEmpty)
+              //   Card(
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(16.0),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Text('Education',
+              //               style: Theme.of(context).textTheme.titleLarge),
+              //           const SizedBox(height: 8),
+              //           ListView.builder(
+              //             shrinkWrap: true,
+              //             physics: const NeverScrollableScrollPhysics(),
+              //             itemCount: _profile!.education.length,
+              //             itemBuilder: (context, index) {
+              //               final edu = _profile!.education[index];
+              //               return ListTile(
+              //                 title: Text(edu.degree),
+              //                 subtitle: Column(
+              //                   crossAxisAlignment: CrossAxisAlignment.start,
+              //                   children: [
+              //                     Text(edu.institution),
+              //                     Text('Graduated: ${edu.graduationYear}'),
+              //                   ],
+              //                 ),
+              //               );
+              //             },
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
 
               // Resume
               if (_profile!.resumePath != null)

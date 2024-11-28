@@ -1,3 +1,5 @@
+import 'package:find_your_job/Api/job_api.dart';
+import 'package:find_your_job/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,22 +11,14 @@ class JobSearch extends StatefulWidget {
 }
 
 class _JobSearch extends State<JobSearch> {
-  List<String> itemJobs = [
-    'Design',
-    'Finance',
-    'Education',
-    'Restaurent',
-    'Health',
-    'Programmer'
-  ];
-  List<IconData> itemIcon = [
-    Icons.movie,
-    Icons.card_membership,
-    Icons.school,
-    Icons.storefront,
-    Icons.spa,
-    Icons.terminal
-  ];
+  late Future<JobCategoriesResponse> futureJob;
+
+  @override
+  void initState() {
+    super.initState();
+    futureJob = fetchJob();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,27 +45,15 @@ class _JobSearch extends State<JobSearch> {
                 style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemCount: itemJobs.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          child: Icon(itemIcon[index]),
-                        ),
-                        SizedBox(height: 10),
-                        Text(itemJobs[index])
-                      ],
-                    ),
-                  );
+              FutureBuilder<JobCategoriesResponse>(
+                future: futureJob,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(snapshot.data!.results.toString());
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return CircularProgressIndicator();
                 },
               )
             ],

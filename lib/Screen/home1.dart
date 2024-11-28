@@ -1,3 +1,5 @@
+import 'package:find_your_job/Search%20Locality/search_locality.dart';
+
 import '../Search Job/jobsearch.dart';
 
 import 'package:flutter/material.dart';
@@ -86,14 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 30,
                   bottom: 90,
                   child: Container(
-                    child:GestureDetector(
+                    child: GestureDetector(
                       onTap: () {
                         // Navigate to the desired screen when the container is tapped
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const JobSearch()), // Replace with your target screen
+                                  const SearchLocation()), // Replace with your target screen
                         );
                       },
                       child: const Row(
@@ -179,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: Text(
                                   resourceTypes[index],
                                   style: GoogleFonts.aBeeZee(
-                                      fontWeight: FontWeight.bold, fontSize: 20),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
                                 ),
                                 subtitle: Text(companyNames[index]),
                                 onTap: () {

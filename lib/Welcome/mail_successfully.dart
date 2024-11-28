@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../home/home.dart';
-import 'forgetpassword.dart';
+import 'forget_password.dart';
 
 class VerifySucces extends StatefulWidget {
   const VerifySucces({super.key});
@@ -24,10 +24,11 @@ class _VerifySuccesState extends State<VerifySucces> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(height: 60),
                 Text(
                   'Successfully',
                   style: GoogleFonts.aBeeZee(
-                      fontWeight: FontWeight.bold, fontSize: 20),
+                      fontWeight: FontWeight.bold, fontSize: 25),
                 ),
                 SizedBox(
                   height: 20,
@@ -35,13 +36,13 @@ class _VerifySuccesState extends State<VerifySucces> {
                 Text('''       Lorem ipsum dolor sit amet, consectetur    
             adipiscing  elit, sed do eiusmod tempor'''),
                 const SizedBox(
-                  height: 30,
+                  height: 60,
                 ),
                 Image.asset('asset/check email.png'),
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 60,
             ),
            
             Column(
@@ -60,18 +61,9 @@ class _VerifySuccesState extends State<VerifySucces> {
                   Navigator.push(context,
                           MaterialPageRoute(builder: (context) =>LoginScreen()));
                 },
-                selectColor: const Color.fromARGB(255, 18, 15, 115),),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Text('You dont have an account yet?  '),
-                  ],
-                ),
+                selectColor: const Color.fromARGB(255, 155, 153, 213),),
+                
+                
               ],
             ),
           ],

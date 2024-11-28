@@ -1,4 +1,4 @@
-import 'package:find_your_job/Welcome/forgetpassword.dart';
+import 'package:find_your_job/Welcome/forget_password.dart';
 import 'package:find_your_job/Welcome/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,10 +23,11 @@ class _CreateAccountState extends State<CreateAccount> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(height: 60),
                   Text(
                     'Create an Account ',
                     style: GoogleFonts.aBeeZee(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                        fontWeight: FontWeight.bold, fontSize: 25),
                   ),
                   SizedBox(
                     height: 20,
@@ -91,13 +92,14 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               Row(
                 children: [
+                  SizedBox(width: 20),
                   Text('Remember me'),
                   SizedBox(
                     width: 70,
                   ),
                   UseGestureDetector(
                     itemColor: Colors.black,
-                      name: 'Forget Password',
+                      name: 'Forget Password ?',
                       onTap: () {
                         Navigator.push(
                             context,
@@ -117,8 +119,16 @@ class _CreateAccountState extends State<CreateAccount> {
                   SizedBox(
                     height: 20,
                   ),
-                  UseElevated(name: 'SIGN WITH GOOGLE', onPressed: (){},
-                  selectColor:  const Color.fromARGB(255, 18, 15, 115),),
+                  Row(
+                    children: [
+                     
+                      UseElevated(
+                        name: 'SIGN WITH GOOGLE', onPressed: (){},
+                      selectColor:  const Color.fromARGB(255, 18, 15, 115),
+                     
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: 20,
                   ),

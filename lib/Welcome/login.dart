@@ -1,9 +1,9 @@
-import 'package:find_your_job/Welcome/forgetpassword.dart';
+import 'package:find_your_job/Welcome/forget_password.dart';
 import 'package:find_your_job/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'createaccount.dart';
+import 'create_account.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -75,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Row(
               children: [
+                SizedBox(width: 20),
                 Text('Remember me'),
                 SizedBox(
                   width: 70,

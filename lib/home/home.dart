@@ -1,12 +1,12 @@
+import 'package:find_your_job/NoUse/resource.dart';
+import 'package:find_your_job/Screen/profile_display.dart';
+import 'package:find_your_job/profile/profile.dart';
+
 import '../Screen/Job_save.dart';
-import '../Settings/add_profile.dart';
 import '../Screen/connection_others.dart';
-import '../Profile/profile_display.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Screen/home1.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
     const HomeScreen(),
     const ConnectOther(),
     const ProfileDisplay(),
-    const AddProfile(),
     const SelectJob(),
+    const SaveJob(),
   ];
   final List<String> titles = [
     'Home',

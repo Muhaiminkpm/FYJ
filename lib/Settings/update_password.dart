@@ -1,3 +1,5 @@
+import 'package:find_your_job/Settings/settings.dart';
+import 'package:find_your_job/Welcome/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -75,19 +77,11 @@ class _PasswordUpdateState extends State<PasswordUpdate> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text('UPDATE', style: GoogleFonts.aBeeZee(
-                        color: Colors.white
-                      ),),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)
-                        ),
-                        backgroundColor: const Color.fromARGB(255, 18, 15, 115),
-                        
-                      ),
-                    ),
+                   UseElevated(name:'UPDATE', onPressed: (){
+                     Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SettingsScreen()));
+   
+                   }, selectColor: const Color.fromARGB(255, 18, 15, 115))
                   ],
                 )
           ],
