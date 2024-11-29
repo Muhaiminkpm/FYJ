@@ -11,6 +11,8 @@ class JobSearch extends StatefulWidget {
 }
 
 class _JobSearch extends State<JobSearch> {
+  
+
   late Future<JobCategoriesResponse> futureJob;
 
   @override
@@ -48,12 +50,38 @@ class _JobSearch extends State<JobSearch> {
               FutureBuilder<JobCategoriesResponse>(
                 future: futureJob,
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(snapshot.data!.results.toString());
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
                   } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
+                    return Center(
+                      child: Text('${snapshot.error}'),
+                    );
+                  } else if (!snapshot.hasData ||
+                      snapshot.data!.results.isEmpty) {
+                    return const Center(
+                      child: Text('No job categories found'),
+                    );
                   }
-                  return CircularProgressIndicator();
+                  return Center(
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: snapshot.data!.results.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Text(snapshot.data!.results[index].label);
+                      // return new Card(
+                      //   child: new GridTile(
+                          
+                      //     child:  new Text(snapshot.data!.results.first.label), //just for testing, will fill with image later
+                      //   ),
+                      // );
+                    },
+                  ));
                 },
               )
             ],

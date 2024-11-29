@@ -2,7 +2,6 @@ import 'package:find_your_job/Welcome/forget_password.dart';
 import 'package:find_your_job/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'create_account.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,6 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Text(
                   'WELCOME BACK',
                   style: GoogleFonts.aBeeZee(

@@ -1,7 +1,5 @@
 import 'package:find_your_job/NoUse/resource.dart';
 import 'package:find_your_job/Screen/profile_display.dart';
-import 'package:find_your_job/profile/profile.dart';
-
 import '../Screen/Job_save.dart';
 import '../Screen/connection_others.dart';
 import 'package:flutter/material.dart';
