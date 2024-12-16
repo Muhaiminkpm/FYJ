@@ -78,15 +78,7 @@ class _CreateAccountState extends State<CreateAccount> {
               SizedBox(
                 height: 10,
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
+              UseTextFormField(),
               SizedBox(
                 height: 20,
               ),
@@ -119,15 +111,10 @@ class _CreateAccountState extends State<CreateAccount> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    children: [
-                     
-                      UseElevated(
-                        name: 'SIGN WITH GOOGLE', onPressed: (){},
-                      selectColor:  const Color.fromARGB(255, 18, 15, 115),
-                     
-                      ),
-                    ],
+                  UseElevated(
+                    name: 'SIGN WITH GOOGLE', onPressed: (){},
+                  selectColor:  const Color.fromARGB(255, 18, 15, 115),
+                                       
                   ),
                   SizedBox(
                     height: 20,
@@ -153,6 +140,25 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class UseTextFormField extends StatelessWidget {
+  const UseTextFormField({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        fillColor: Colors.white,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
       ),
     );

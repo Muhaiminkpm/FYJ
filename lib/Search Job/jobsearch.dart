@@ -47,42 +47,49 @@ class _JobSearch extends State<JobSearch> {
                 style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
-              FutureBuilder<JobCategoriesResponse>(
-                future: futureJob,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+              SingleChildScrollView(
+                child: FutureBuilder<JobCategoriesResponse>(
+                  future: futureJob,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('${snapshot.error}'),
+                      );
+                    } else if (!snapshot.hasData ||
+                        snapshot.data!.results.isEmpty) {
+                      return const Center(
+                        child: Text('No job categories found'),
+                      );
+                    }
                     return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(
-                      child: Text('${snapshot.error}'),
-                    );
-                  } else if (!snapshot.hasData ||
-                      snapshot.data!.results.isEmpty) {
-                    return const Center(
-                      child: Text('No job categories found'),
-                    );
-                  }
-                  return Center(
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
-                    itemCount: snapshot.data!.results.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Text(snapshot.data!.results[index].label);
-                      // return new Card(
-                      //   child: new GridTile(
-                          
-                      //     child:  new Text(snapshot.data!.results.first.label), //just for testing, will fill with image later
-                      //   ),
-                      // );
-                    },
-                  ));
-                },
+                        child: SingleChildScrollView(
+                          child: GridView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                                              gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          ),
+                                              itemCount: snapshot.data!.results.length,
+                                              itemBuilder: (BuildContext context, int index) {
+                          return Card(
+                            child: Text(snapshot.data!.results[index].label)
+                            );
+                          // return new Card(
+                          //   child: new GridTile(
+                              
+                          //     child:  new Text(snapshot.data!.results.first.label), //just for testing, will fill with image later
+                          //   ),
+                          // );
+                                              },
+                                            ),
+                        ));
+                  },
+                ),
               )
             ],
           ),

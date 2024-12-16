@@ -112,7 +112,7 @@ class UseElevated extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         backgroundColor: selectColor,
-        fixedSize: const Size(350, 50),
+        fixedSize: const Size(300, 50),
       ),
     );
   }
